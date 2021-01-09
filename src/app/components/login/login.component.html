@@ -1,0 +1,15 @@
+<div class="container-fluid screen-height">
+    <div class="container form-design border shadow p-4">
+        <h2 class="text-center mb-3">LOGIN</h2>
+        <br>
+        <div class="form-group">
+            <label for="userEmail">User</label>
+            <input id="userEmail" class="form-control" type="email" #userEmail>
+        </div>
+        <div class="form-group">
+            <label for="userPassword">Password</label>
+            <input id="userPassword" class="form-control" type="password" #userPassword>
+        </div>
+        <button (click)="login(userEmail.value,userPassword.value)" type="button" class="btn btn-primary btn-block">Login</button>
+    </div>
+</div>
