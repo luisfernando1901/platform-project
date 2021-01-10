@@ -40,6 +40,11 @@ export class ProjectSelectorComponent implements OnInit, OnDestroy {
     });
   }
 
+  getProjectData(projectName:string){
+    //console.log(projectName);
+    this.router.navigate(['/home',projectName]);
+  }
+
   async logout(){
     await this.authService.logOut().then(res=> console.log('Saliste con éxito'));
     console.log(this.authService.signedIn);

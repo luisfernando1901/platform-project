@@ -14,13 +14,27 @@ import { ProjectSelectorComponent } from './components/project-selector/project-
 //Importamos las rutas
 import { routing } from './app.routes';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+//Importamos el sidenav
+import {MatSidenavModule} from '@angular/material/sidenav';
+import { HomeComponent } from './components/home/home.component';
+import { InicioComponent } from './components/home/homeMenu/inicio/inicio.component';
+import { RegistroComponent } from './components/home/homeMenu/registro/registro.component';
+import { BusquedaComponent } from './components/home/homeMenu/busqueda/busqueda.component';
+import { ReporteComponent } from './components/home/homeMenu/reporte/reporte.component';
+import { AdministracionComponent } from './components/home/homeMenu/administracion/administracion.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    ProjectSelectorComponent
+    ProjectSelectorComponent,
+    HomeComponent,
+    InicioComponent,
+    RegistroComponent,
+    BusquedaComponent,
+    ReporteComponent,
+    AdministracionComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,6 +43,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AngularFirestoreModule,
     routing,
     BrowserAnimationsModule,
+    MatSidenavModule,
   ],
   providers: [
     AuthService,

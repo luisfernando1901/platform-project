@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
     await this.authService.signIn(email, password);
     console.log(this.authService.signedIn);
     if (this.authService.signedIn == true)
-      this.router.navigate(['/project']);
+      this.router.navigate(['/projects']);
 
   }
 
