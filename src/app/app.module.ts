@@ -14,8 +14,15 @@ import { ProjectSelectorComponent } from './components/project-selector/project-
 //Importamos las rutas
 import { routing } from './app.routes';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-//Importamos el sidenav
+//Importamos los módulos de Material
 import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
+//Importamos reactive forms para poder utilizar el [formGroup]
+import { ReactiveFormsModule } from '@angular/forms';
+//Importamos componentes
 import { HomeComponent } from './components/home/home.component';
 import { InicioComponent } from './components/home/homeMenu/inicio/inicio.component';
 import { RegistroComponent } from './components/home/homeMenu/registro/registro.component';
@@ -44,6 +51,11 @@ import { AdministracionComponent } from './components/home/homeMenu/administraci
     routing,
     BrowserAnimationsModule,
     MatSidenavModule,
+    MatStepperModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    ReactiveFormsModule,
   ],
   providers: [
     AuthService,
