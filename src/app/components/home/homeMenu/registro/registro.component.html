@@ -4,25 +4,29 @@
 <mat-horizontal-stepper [linear]="isLinear" #stepper>
     <mat-step [stepControl]="firstFormGroup">
         <form [formGroup]="firstFormGroup">
-            <ng-template matStepLabel>Fill out your name</ng-template>
+            <ng-template matStepLabel>Generalidades</ng-template>
             <mat-form-field class="mr-5">
-                <mat-label>Nombre</mat-label>
-                <input matInput placeholder="Nombre" formControlName="firstCtrl" required>
+                <mat-label>Origen del problema</mat-label>
+                <input matInput formControlName="firstCtrl" required>
             </mat-form-field>
             <mat-form-field class="mr-5">
-                <mat-label>Apellido</mat-label>
+                <mat-label>Sistema</mat-label>
                 <input matInput placeholder="Apellido" required>
             </mat-form-field>
             <mat-form-field class="mr-5">
-                <mat-label>Edad</mat-label>
+                <mat-label>Ubicación</mat-label>
                 <input matInput placeholder="Last name, First name" required>
             </mat-form-field>
             <mat-form-field class="mr-5">
-                <mat-label>Correo electrónico</mat-label>
+                <mat-label>Componente</mat-label>
                 <input matInput placeholder="Last name, First name" required>
             </mat-form-field>
             <mat-form-field class="mr-5">
-                <mat-label>Empresa</mat-label>
+                <mat-label>Marca del componente</mat-label>
+                <input matInput placeholder="Last name, First name" required>
+            </mat-form-field>
+            <mat-form-field class="mr-5">
+                <mat-label>Proveedor del componente</mat-label>
                 <input matInput placeholder="Last name, First name" required>
             </mat-form-field>
             <div>
@@ -30,11 +34,61 @@
             </div>
         </form>
     </mat-step>
-    <mat-step [stepControl]="secondFormGroup" label="Fill out your address">
+    <mat-step [stepControl]="secondFormGroup" label="Detalle">
         <form [formGroup]="secondFormGroup">
-            <mat-form-field>
-                <mat-label>Address</mat-label>
+            <mat-form-field class="mr-5">
+                <mat-label>Causa</mat-label>
                 <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
+            </mat-form-field>
+            <mat-form-field class="mr-5">
+                <mat-label>Consecuencia</mat-label>
+                <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
+            </mat-form-field>
+            <mat-form-field class="mr-5">
+                <mat-label>Efecto</mat-label>
+                <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
+            </mat-form-field>
+            <mat-form-field class="mr-5">
+                <mat-label>Severidad</mat-label>
+                <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
+            </mat-form-field>
+            <mat-form-field class="mr-5">
+                <mat-label>Impacto en usuarios</mat-label>
+                <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
+            </mat-form-field>
+            <mat-form-field class="mr-5">
+                <mat-label>Solución</mat-label>
+                <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
+            </mat-form-field>
+            <mat-form-field class="mr-5">
+                <mat-label>Responsable</mat-label>
+                <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
+            </mat-form-field>
+            <mat-form-field class="mr-5">
+                <mat-label>Costo</mat-label>
+                <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
+            </mat-form-field>
+            <mat-form-field class="mr-5">
+                <mat-label>Tiempo</mat-label>
+                <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
+            </mat-form-field>
+            <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Next</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="thirdFormGroup" label="Lección aprendida">
+        <form [formGroup]="thirdFormGroup">
+            <mat-form-field class="mr-5">
+                <mat-label>Tipo de lección aprendida</mat-label>
+                <input matInput formControlName="thirdCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
+            </mat-form-field>
+            <mat-form-field class="mr-5">
+                <mat-label>Descripción</mat-label>
+
+                <textarea matInput formControlName="thirdCtrl" placeholder="Ex. It makes me feel..."
+                    required></textarea>
             </mat-form-field>
             <div>
                 <button mat-button matStepperPrevious>Back</button>
