@@ -20,6 +20,10 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
+//Es necesario incluir estas 2 para utilizar el datepicker
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+
 
 //Importamos reactive forms para poder utilizar el [formGroup]
 import { ReactiveFormsModule } from '@angular/forms';
@@ -56,6 +60,8 @@ import { AdministracionComponent } from './components/home/homeMenu/administraci
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     ReactiveFormsModule,
   ],
   providers: [
