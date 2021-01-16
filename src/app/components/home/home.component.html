@@ -1,13 +1,16 @@
 <mat-drawer-container class="example-container">
-    <mat-drawer mode="side" opened class="pt-5">
+    <mat-drawer mode="side" opened class="pt-3">
+        <span (click)="logout()" class="material-icons md-24 pl-3" type="button">power_settings_new</span>
+        <h2 class="text-center">LOGO</h2>
         <a class="nav-link" (click)="inicioNav()">Inicio</a>
         <a class="nav-link" (click)="registroNav()">Registro de problemas</a>
         <a class="nav-link" (click)="busquedaNav()">Búsqueda de problemas</a>
         <a class="nav-link" (click)="reporteNav()">Reporte general</a>
         <a class="nav-link" (click)="administracionNav()">Administración del edificio</a>
-        <button (click)="logout()" type="button" class="btn btn-primary">Logout</button>
     </mat-drawer>
     <mat-drawer-content>
-        <router-outlet></router-outlet>
+        <div class="container-fluid">
+            <router-outlet></router-outlet>
+        </div>
     </mat-drawer-content>
 </mat-drawer-container>

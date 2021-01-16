@@ -4,7 +4,8 @@
     </div>
     
     <h1>Seleccione un proyecto:</h1>
-    <div class="card-columns">
+    <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+    <div class="card-columns" *ngIf="!loading">
         <div class="card project-card" style="width: 18rem;" *ngFor="let projectName of projects">
             <img src="../../../assets/images/project1.jpg" class="card-img-top img-card" alt="...">
             <div class="card-body">

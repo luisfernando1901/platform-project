@@ -12,3 +12,5 @@
   mat-drawer {
       width: 200px;
   }
+
+  .material-icons.md-24 { font-size: 24px; }

@@ -13,6 +13,7 @@ export class ProjectSelectorComponent implements OnInit, OnDestroy {
   subscription1: Subscription;
   subscription2: Subscription;
   projects:string[] = [];
+  loading:boolean = true;
 
   empresa:string;
 
@@ -35,6 +36,7 @@ export class ProjectSelectorComponent implements OnInit, OnDestroy {
     console.log(this.empresa);
     this.subscription2 = this.databaseService.identifyProjects().valueChanges().subscribe(projects => {
       this.projects = projects[0]['projects'];
+      this.loading = !this.loading;
       console.log(this.projects);
 
     });
