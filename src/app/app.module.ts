@@ -22,6 +22,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatSelectModule} from '@angular/material/select';
 //Es necesario incluir estas 2 para utilizar el datepicker
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -67,6 +68,7 @@ import { AdministracionComponent } from './components/home/homeMenu/administraci
     ReactiveFormsModule,
     MatIconModule,
     MatProgressBarModule,
+    MatSelectModule,
   ],
   providers: [
     AuthService,

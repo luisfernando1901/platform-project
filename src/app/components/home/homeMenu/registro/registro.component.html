@@ -1,34 +1,47 @@
-<button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
-    {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
-</button>
 <mat-horizontal-stepper [linear]="isLinear" #stepper>
     <mat-step [stepControl]="firstFormGroup">
         <form [formGroup]="firstFormGroup">
             <ng-template matStepLabel>Generalidades</ng-template>
             <mat-form-field class="mr-5">
-                <mat-label>Origen del problema</mat-label>
-                <input matInput formControlName="firstCtrl" required>
-            </mat-form-field>
-            <mat-form-field class="mr-5">
                 <mat-label>Sistema</mat-label>
-                <input matInput placeholder="Apellido" required>
-            </mat-form-field>
-            <mat-form-field class="mr-5">
+                <mat-select>
+                  <mat-option *ngFor="let sistema of sistemas" [value]="sistema">
+                    {{sistema}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field class="mr-5">
                 <mat-label>Ubicación</mat-label>
-                <input matInput placeholder="Last name, First name" required>
-            </mat-form-field>
-            <mat-form-field class="mr-5">
+                <mat-select>
+                  <mat-option *ngFor="let ubicacion of ubicaciones" [value]="ubicacion">
+                    {{ubicacion}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field class="mr-5">
                 <mat-label>Componente</mat-label>
-                <input matInput placeholder="Last name, First name" required>
-            </mat-form-field>
-            <mat-form-field class="mr-5">
+                <mat-select>
+                  <mat-option *ngFor="let componente of componentes" [value]="componente">
+                    {{componente}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field class="mr-5">
                 <mat-label>Marca del componente</mat-label>
-                <input matInput placeholder="Last name, First name" required>
-            </mat-form-field>
+                <mat-select>
+                  <mat-option *ngFor="let marcaComponente of marcaComponentes" [value]="marcaComponente">
+                    {{marcaComponente}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
             <mat-form-field class="mr-5">
-                <mat-label>Proveedor del componente</mat-label>
-                <input matInput placeholder="Last name, First name" required>
-            </mat-form-field>
+                <mat-label>Proveedor</mat-label>
+                <mat-select>
+                  <mat-option *ngFor="let proveedor of proveedores" [value]="proveedor">
+                    {{proveedor}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
             <div>
                 <button mat-button matStepperNext>Next</button>
             </div>
@@ -37,41 +50,86 @@
     <mat-step [stepControl]="secondFormGroup" label="Detalle">
         <form [formGroup]="secondFormGroup">
             <mat-form-field class="mr-5">
-                <mat-label>Causa</mat-label>
-                <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
-            </mat-form-field>
-            <mat-form-field class="mr-5">
-                <mat-label>Consecuencia</mat-label>
-                <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
-            </mat-form-field>
-            <mat-form-field class="mr-5">
+                <mat-label>(REVISAR)Origen del problema</mat-label>
+                <mat-select>
+                  <mat-option *ngFor="let sistema of sistemas" [value]="sistema">
+                    {{sistema}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field class="mr-5">
                 <mat-label>Efecto</mat-label>
-                <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
-            </mat-form-field>
-            <mat-form-field class="mr-5">
+                <mat-select>
+                  <mat-option *ngFor="let efecto of efectos" [value]="efecto">
+                    {{efecto}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field class="mr-5">
                 <mat-label>Severidad</mat-label>
-                <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
-            </mat-form-field>
-            <mat-form-field class="mr-5">
+                <mat-select>
+                  <mat-option *ngFor="let nivel of niveles" [value]="nivel">
+                    {{nivel}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field class="mr-5">
                 <mat-label>Impacto en usuarios</mat-label>
-                <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
-            </mat-form-field>
-            <mat-form-field class="mr-5">
-                <mat-label>Solución</mat-label>
-                <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
-            </mat-form-field>
-            <mat-form-field class="mr-5">
-                <mat-label>Responsable</mat-label>
-                <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
-            </mat-form-field>
-            <mat-form-field class="mr-5">
-                <mat-label>Costo</mat-label>
-                <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
+                <mat-select>
+                  <mat-option *ngFor="let nivel of niveles" [value]="nivel">
+                    {{nivel}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field class="mr-5">
+                <mat-label>Personal encargado</mat-label>
+                <mat-select>
+                  <mat-option *ngFor="let encargado of encargados" [value]="encargado">
+                    {{encargado}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field class="mr-5">
+                <mat-label>Costo (S/.)</mat-label>
+                <input matInput placeholder="S/." type="number">
             </mat-form-field>
             <mat-form-field class="mr-5">
                 <mat-label>Tiempo</mat-label>
-                <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
+                <input matInput>
             </mat-form-field>
+            <br>
+            <div class="container-fluid p-0">
+                <div class="row">
+                    <div class="col">
+                        <mat-form-field class="mr-5 big-text">
+                            <mat-label>Acción emprendida</mat-label>
+                            <textarea matInput placeholder="Ex. It makes me feel..." class="big-text"></textarea>
+                        </mat-form-field>
+                    </div>
+                    <div class="col">
+                        <mat-form-field class="mr-5 big-text">
+                            <mat-label>Descripción del problema</mat-label>
+                            <textarea matInput placeholder="Ex. It makes me feel..." class="big-text"></textarea>
+                        </mat-form-field>
+                    </div>
+                </div>  
+            </div>
+            <div class="container-fluid p-0">
+                <div class="row">
+                    <div class="col">
+                        <mat-form-field class="mr-5 big-text">
+                            <mat-label>Causa</mat-label>
+                            <textarea matInput placeholder="Ex. It makes me feel..." class="big-text"></textarea>
+                        </mat-form-field>
+                    </div>
+                    <div class="col">
+                        <mat-form-field class="mr-5 big-text">
+                            <mat-label>Consecuencia</mat-label>
+                            <textarea matInput placeholder="Ex. It makes me feel..." class="big-text"></textarea>
+                        </mat-form-field>
+                    </div>
+                </div>  
+            </div>
             <div>
                 <button mat-button matStepperPrevious>Back</button>
                 <button mat-button matStepperNext>Next</button>
@@ -80,28 +138,20 @@
     </mat-step>
     <mat-step [stepControl]="thirdFormGroup" label="Lección aprendida">
         <form [formGroup]="thirdFormGroup">
+            
             <mat-form-field class="mr-5">
                 <mat-label>Tipo de lección aprendida</mat-label>
-                <input matInput formControlName="thirdCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
+                <input matInput  placeholder="Ex. 1 Main St, New York, NY">
             </mat-form-field>
             <mat-form-field class="mr-5">
-                <mat-label>Descripción</mat-label>
-
-                <textarea matInput formControlName="thirdCtrl" placeholder="Ex. It makes me feel..."
-                    required></textarea>
+                <mat-label>Descripción del problema</mat-label>
+                <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
             </mat-form-field>
             <div>
                 <button mat-button matStepperPrevious>Back</button>
-                <button mat-button matStepperNext>Next</button>
+                <button mat-button>Registrar</button>
+                <button mat-button (click)="stepper.reset()">Reset</button>
             </div>
         </form>
-    </mat-step>
-    <mat-step>
-        <ng-template matStepLabel>Done</ng-template>
-        <p>You are now done.</p>
-        <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button (click)="stepper.reset()">Reset</button>
-        </div>
     </mat-step>
 </mat-horizontal-stepper>
