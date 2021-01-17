@@ -106,6 +106,11 @@ export class RegistroComponent implements OnInit {
   'Malas prácticas constructivas',
   'Problemas de mantenimiento'
   ];
+  origenesDeProblema:string[] = [
+    'Diseño',
+    'Construcción',
+    'Operación y mantenimiento'
+  ];
   niveles:string[] = ['Alto','Medio','Bajo'];
   constructor(private _formBuilder:FormBuilder) { }
 
