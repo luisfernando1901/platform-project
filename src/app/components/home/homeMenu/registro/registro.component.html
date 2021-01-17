@@ -130,7 +130,7 @@
                     </div>
                 </div>  
             </div>
-            <div>
+            <div class="mt-3">
                 <button mat-button matStepperPrevious>Back</button>
                 <button mat-button matStepperNext>Next</button>
             </div>
@@ -138,16 +138,68 @@
     </mat-step>
     <mat-step [stepControl]="thirdFormGroup" label="Lección aprendida">
         <form [formGroup]="thirdFormGroup">
-            
-            <mat-form-field class="mr-5">
-                <mat-label>Tipo de lección aprendida</mat-label>
-                <input matInput  placeholder="Ex. 1 Main St, New York, NY">
-            </mat-form-field>
-            <mat-form-field class="mr-5">
-                <mat-label>Descripción del problema</mat-label>
-                <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
-            </mat-form-field>
-            <div>
+          <mat-form-field class="mr-5">
+            <mat-label>Tipo de lección aprendida</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let tipoDeLeccionAprendida of tiposDeLeccionAprendida" [value]="tipoDeLeccionAprendida">
+                {{tipoDeLeccionAprendida}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="mr-5 text-fit">
+            <mat-label class="text-fit">(REVISAR)¿A quien debe ser reportada esta lección aprendida?</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let encargado of encargados" [value]="encargado">
+                {{encargado}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div class="container-fluid p-0">
+            <div class="row">
+                <div class="col">
+                    <mat-form-field class="mr-5 big-text">
+                        <mat-label>¿Qué se puede rescatar de la acción emprendida?</mat-label>
+                        <textarea matInput placeholder="Ex. It makes me feel..." class="big-text"></textarea>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field class="mr-5 big-text">
+                        <mat-label>Mejora propuesta por el especialista</mat-label>
+                        <textarea matInput placeholder="Ex. It makes me feel..." class="big-text"></textarea>
+                    </mat-form-field>
+                </div>
+            </div>  
+        </div>
+        <div class="container-fluid p-0">
+          <div class="row">
+              <div class="col">
+                  <mat-form-field class="mr-5 big-text">
+                      <mat-label>¿Qué resultado se obtendría de aplicar la mejora propuesta?</mat-label>
+                      <textarea matInput placeholder="Ex. It makes me feel..." class="big-text"></textarea>
+                  </mat-form-field>
+              </div>
+              <div class="col">
+                  <mat-form-field class="mr-5 big-text">
+                      <mat-label>Mejora propuesta por el administrador</mat-label>
+                      <textarea matInput placeholder="Ex. It makes me feel..." class="big-text"></textarea>
+                  </mat-form-field>
+              </div>
+          </div>  
+      </div>
+      <div class="container-fluid p-0">
+        <div class="row">
+            <div class="col">
+                <mat-form-field class="mr-5 big-text">
+                    <mat-label>¿Qué resultado se obtendría de aplicar la mejora propuesta?</mat-label>
+                    <textarea matInput placeholder="Ex. It makes me feel..." class="big-text"></textarea>
+                </mat-form-field>
+            </div>
+            <div class="col">
+                
+            </div>
+        </div>  
+    </div>
+            <div class="mt-3">
                 <button mat-button matStepperPrevious>Back</button>
                 <button mat-button>Registrar</button>
                 <button mat-button (click)="stepper.reset()">Reset</button>

@@ -99,6 +99,13 @@ export class RegistroComponent implements OnInit {
   'Promart',
   'ThyssenKrupp'
   ];
+  tiposDeLeccionAprendida:string[] = [
+  'Suposiciones de diseño incorrectas',
+  'Defectos de diseño',
+  'Especificaciones técnicas deficientes',
+  'Malas prácticas constructivas',
+  'Problemas de mantenimiento'
+  ];
   niveles:string[] = ['Alto','Medio','Bajo'];
   constructor(private _formBuilder:FormBuilder) { }
 
