@@ -11,7 +11,7 @@ import { LoginComponent } from './components/login/login.component';
 //Importamos los servicios
 import { AuthService } from './services/auth.service';
 import { ProjectSelectorComponent } from './components/project-selector/project-selector.component';
-//Importamos las rutas
+//Importamos las rutas 
 import { routing } from './app.routes';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //Importamos los módulos de Material
