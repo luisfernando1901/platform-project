@@ -146,14 +146,35 @@ export class RegistroComponent implements OnInit {
       steps: this._formBuilder.array([
         this._formBuilder.group({
           // ... form controls for our step
-          
+          Sistema: [''],
+          Ubicacion: [''],
+          Componente:[''],
+          MarcaDelComponente:[''],
+          Proveedor: ['']
         }),
         this._formBuilder.group({
           // ... form controls for our step
-          firstCtrl: this._formBuilder.control('')
+          OrigenDelProblema: [''],
+          Efecto: [''],
+          Severidad:[''],
+          ImpactoEnUsuarios:[''],
+          PersonalEncargado: [''],
+          Costo: [''],
+          Tiempo: [''],
+          DescripcionDelProblema: [''],
+          Causa: [''],
+          Consecuencia: [''],
+          AccionEmprendida: ['']
         }),
         this._formBuilder.group({
           // ... form controls for our step
+          TipoDeLeccionAprendida: [''],
+          Reportado: [''],
+          Rescatar:[''],
+          PropuestaEspecialista:[''],
+          ResultadoPropuestaEspecialista: [''],
+          PropuestaAdministrador: [''],
+          ResultadoPropuestaAdministrador: ['']
         })
         // ... more form groups for each step we have
       ]),
@@ -181,6 +202,10 @@ export class RegistroComponent implements OnInit {
   // formArray getter
   get formArray() {
     return this.frmStepper.get('steps') as FormArray;
+  }
+
+  submit(){
+    console.log(this.frmStepper.get('steps').value);
   }
 
 }
