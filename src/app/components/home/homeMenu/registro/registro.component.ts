@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
+//Importamos el servicio
+import { DatabaseService } from '../../../../services/database.service';
+
+
 //Todo esto se importa para cambiar de fecha el datepicker
 import {
   MAT_MOMENT_DATE_FORMATS,
@@ -136,8 +140,10 @@ export class RegistroComponent implements OnInit {
     'Operación y mantenimiento'
   ];
   niveles: string[] = ['Alto', 'Medio', 'Bajo'];
+
   constructor(private _formBuilder: FormBuilder,
-    private _adapter: DateAdapter<any>) {
+    private _adapter: DateAdapter<any>,
+    private databaseService: DatabaseService) {
 
   }
 
@@ -146,6 +152,7 @@ export class RegistroComponent implements OnInit {
       steps: this._formBuilder.array([
         this._formBuilder.group({
           // ... form controls for our step
+          // Fecha: [''], // Aún no se sabe si agregamos la elección de fecha o lo guardamos con la fecha del mismo ingreso del problema
           Sistema: [''],
           Ubicacion: [''],
           Componente:[''],
@@ -205,7 +212,16 @@ export class RegistroComponent implements OnInit {
   }
 
   submit(){
-    console.log(this.frmStepper.get('steps').value);
+    let userInfo:any = {};
+    let formArray: object[] = [];
+    let formObj = {};
+    formArray = this.frmStepper.get('steps').value;
+    formObj = Object.assign(formArray[0],formArray[1],formArray[2]);
+    console.log(formObj);
+    //Aqui obtenemos los parámetros necesarios para llegar al documento de registro de problema en Firecloud
+    userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    //Aqui falta implementar el llamado al servicio de agregar un Problema
+    this.databaseService.addProblem(userInfo['company'],userInfo['projectName'],formObj);
   }
 
 }

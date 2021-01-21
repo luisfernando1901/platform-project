@@ -33,6 +33,7 @@ export class ProjectSelectorComponent implements OnInit, OnDestroy {
 
   identifyCompAndProj(param:any){
     this.empresa = param[0]['company'];
+    //localStorage.setItem('empresa',this.empresa);
     console.log(this.empresa);
     this.subscription2 = this.databaseService.identifyProjects().valueChanges().subscribe(projects => {
       this.projects = projects[0]['projects'];
@@ -44,7 +45,7 @@ export class ProjectSelectorComponent implements OnInit, OnDestroy {
 
   getProjectData(projectName:string){
     //console.log(projectName);
-    this.router.navigate(['/home',projectName]);
+    this.router.navigate(['/home',this.empresa,projectName]);
   }
 
   async logout(){

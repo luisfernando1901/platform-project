@@ -11,7 +11,7 @@ import { ProjectSelectorComponent } from './components/project-selector/project-
 const routes = [
     { path: '', component: LoginComponent },
     { path: 'projects', component: ProjectSelectorComponent },
-    { path: 'home/:projectName', component: HomeComponent,
+    { path: 'home/:company/:projectName', component: HomeComponent,
         children:[
             { path: '', component: InicioComponent },
             { path: 'RegistroDeProblemas', component: RegistroComponent },

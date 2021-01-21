@@ -24,4 +24,9 @@ export class DatabaseService {
     return this.angularFirestore.collection("Companies");
   }
 
+  async addProblem(company:string,project:string,form:any){
+    await this.angularFirestore.collection("Companies").doc(company).collection(project).doc('registro de problemas').set(form);
+    console.log('Problema registrado exitosamente!');
+  }
+
 }

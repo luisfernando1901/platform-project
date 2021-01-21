@@ -12,14 +12,20 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  userInfo = {
+    company:'',
+    projectName:''
+  };
 
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router,
               private authService:AuthService) { }
 
   ngOnInit(): void {
-    let productid = this.activatedRoute.snapshot.params.projectName;
-    console.log(productid);// OUTPUT 1534
+    this.userInfo.company = this.activatedRoute.snapshot.params.company;
+    this.userInfo.projectName = this.activatedRoute.snapshot.params.projectName;
+    localStorage.setItem('userInfo', JSON.stringify(this.userInfo));
+    console.log(this.userInfo);// OUTPUT 1534
   }
 
   //Navegaciones
