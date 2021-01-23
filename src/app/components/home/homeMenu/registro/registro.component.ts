@@ -5,6 +5,8 @@ import { DatabaseService } from '../../../../services/database.service';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+//Importamos el snackbar para utilizarlo en este componente
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 //Todo esto se importa para cambiar de fecha el datepicker
 import {
@@ -13,8 +15,6 @@ import {
   MAT_MOMENT_DATE_ADAPTER_OPTIONS,
 } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
-import { StepperSelectionEvent } from '@angular/cdk/stepper';
-import { MatHorizontalStepper } from '@angular/material/stepper';
 
 @Component({
   selector: 'app-registro',
@@ -38,8 +38,8 @@ import { MatHorizontalStepper } from '@angular/material/stepper';
 })
 export class RegistroComponent implements OnInit, OnDestroy {
   subscription1: Subscription;
-  unsubscribe:boolean = false;
-  stepperReset:boolean = false;
+  unsubscribe: boolean = false;
+  stepperReset: boolean = false;
   isLinear = false;
   frmStepper: FormGroup;
   firstFormGroup: FormGroup;
@@ -152,7 +152,8 @@ export class RegistroComponent implements OnInit, OnDestroy {
     private _adapter: DateAdapter<any>,
     private databaseService: DatabaseService,
     private activatedRoute: ActivatedRoute,
-    private router: Router) {
+    private router: Router,
+    private _snackBar: MatSnackBar) {
 
   }
 
@@ -164,16 +165,16 @@ export class RegistroComponent implements OnInit, OnDestroy {
           // Fecha: [''], // Aún no se sabe si agregamos la elección de fecha o lo guardamos con la fecha del mismo ingreso del problema
           Sistema: [''],
           Ubicacion: [''],
-          Componente:[''],
-          MarcaDelComponente:[''],
+          Componente: [''],
+          MarcaDelComponente: [''],
           Proveedor: ['']
         }),
         this._formBuilder.group({
           // ... form controls for our step
-          OrigenDelProblema: [''],
+          OrigenDelProblema: ['', Validators.required],
           Efecto: [''],
-          Severidad:[''],
-          ImpactoEnUsuarios:[''],
+          Severidad: [''],
+          ImpactoEnUsuarios: [''],
           PersonalEncargado: [''],
           Costo: [''],
           Tiempo: [''],
@@ -186,8 +187,8 @@ export class RegistroComponent implements OnInit, OnDestroy {
           // ... form controls for our step
           TipoDeLeccionAprendida: [''],
           Reportado: [''],
-          Rescatar:[''],
-          PropuestaEspecialista:[''],
+          Rescatar: [''],
+          PropuestaEspecialista: [''],
           ResultadoPropuestaEspecialista: [''],
           PropuestaAdministrador: [''],
           ResultadoPropuestaAdministrador: ['']
@@ -229,34 +230,34 @@ export class RegistroComponent implements OnInit, OnDestroy {
     return this.frmStepper.get('steps') as FormArray;
   }
 
-  submit(){
-    let userInfo:any = {};
-    let problemsAmount:any = {}, updateField:string, updateFieldObj:any = {};
+  submit() {
+    let userInfo: any = {};
+    let problemsAmount: any = {}, updateField: string, updateFieldObj: any = {};
     let formArray: object[] = [];
     let formObj = {};
-    let code:string, code_problem:string;
-    let indice:number;
-    let indice_str:string;
+    let code: string, code_problem: string;
+    let indice: number;
+    let indice_str: string;
     formArray = this.frmStepper.get('steps').value;
-    formObj = Object.assign(formArray[0],formArray[1],formArray[2]);
+    formObj = Object.assign(formArray[0], formArray[1], formArray[2]);
     console.log(formObj);
     //Lógica para definir el código del problema registrado
-    if (formObj['OrigenDelProblema']=='Diseño') {
-      code='DIS';
+    if (formObj['OrigenDelProblema'] == 'Diseño') {
+      code = 'DIS';
       updateField = 'cantidad.DIS';
     }
-    if (formObj['OrigenDelProblema']=='Construcción') {
-      code='CON';
+    if (formObj['OrigenDelProblema'] == 'Construcción') {
+      code = 'CON';
       updateField = 'cantidad.CON';
     }
-    if (formObj['OrigenDelProblema']=='Operación y mantenimiento') {
-      code='OyM';
+    if (formObj['OrigenDelProblema'] == 'Operación y mantenimiento') {
+      code = 'OyM';
       updateField = 'cantidad.OyM';
     }
     //Aqui obtenemos los parámetros necesarios para llegar al documento de registro de problema en Firecloud 
     userInfo = JSON.parse(localStorage.getItem('userInfo'));
     //Usamos un servicio para obtener el índice del nuevo problema a registrar
-    this.subscription1 = this.databaseService.calculateIndex(userInfo['company'],userInfo['projectName']).subscribe(params =>{
+    this.subscription1 = this.databaseService.calculateIndex(userInfo['company'], userInfo['projectName']).subscribe(params => {
       this.unsubscribe = true;
       problemsAmount = params;
       console.log('Este es el problem amount al cual le voy a sumar 1:');
@@ -269,17 +270,29 @@ export class RegistroComponent implements OnInit, OnDestroy {
       indice_str = indice.toString();
       code_problem = code + '-' + indice_str;
       //Servicio de agregar un problema con los parámetros dinámicos de company, project, code, code_pronlem y formObj
-      this.databaseService.addProblem(userInfo['company'],userInfo['projectName'],code,code_problem,formObj);
+      this.databaseService.addProblem(userInfo['company'], userInfo['projectName'], code, code_problem, formObj)
+      .then(done =>{
+        this.openSnackBar('Registro exitoso!');
+      })
+      .catch(error =>{
+        this.openSnackBar('Registro fallido');
+      });
       //Hacemos unSubscribe porque en el servicio de abajo vamos a editar el Index de la cantidad de problema, y el subscribe de arriba detectaría que cambió y
-    //haría todo de nuevo y así se convertiría en un bucle infinito
-    this.subscription1.unsubscribe();
-    //Utilizamos el servicio de updateProblemAmount
-    this.databaseService.updateProblemAmount(userInfo['company'],userInfo['projectName'],updateFieldObj);
-    //Limpiamos el formulario
-    this.frmStepper.reset();
-    this.router.navigate(['../'], {relativeTo: this.activatedRoute});
+      //haría todo de nuevo y así se convertiría en un bucle infinito
+      this.subscription1.unsubscribe();
+      //Utilizamos el servicio de updateProblemAmount
+      this.databaseService.updateProblemAmount(userInfo['company'], userInfo['projectName'], updateFieldObj);
+      //Limpiamos el formulario
+      this.frmStepper.reset();
+      this.router.navigate(['../'], { relativeTo: this.activatedRoute });
     });
-    
+
+  }
+  //Funcion de notificación de problema registrado o con problemas de registrar
+  openSnackBar(message: string) {
+    this._snackBar.open(message,'', {
+      duration: 3000,
+    });
   }
 
 }

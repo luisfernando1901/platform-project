@@ -23,6 +23,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatSelectModule} from '@angular/material/select';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 //Es necesario incluir estas 2 para utilizar el datepicker
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -69,6 +70,7 @@ import { AdministracionComponent } from './components/home/homeMenu/administraci
     MatIconModule,
     MatProgressBarModule,
     MatSelectModule,
+    MatSnackBarModule
   ],
   providers: [
     AuthService,
