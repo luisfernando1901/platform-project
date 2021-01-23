@@ -24,9 +24,19 @@ export class DatabaseService {
     return this.angularFirestore.collection("Companies");
   }
 
-  async addProblem(company:string,project:string,form:any){
-    await this.angularFirestore.collection("Companies").doc(company).collection(project).doc('registro de problemas').set(form);
+  async addProblem(company:string,project:string,code:string,code_problem:string,form:any){
+    //Donde dice 'CON' debe ser el nombre dinámico asignado por el form seleccionado, y el doc que se escribe debe ser dinámico al número de registro que le toca de acuerdo
+    //al grupo
+    await this.angularFirestore.collection("Companies").doc(company).collection(project).doc('registro de problemas').collection(code).doc(code_problem).set(form);
     console.log('Problema registrado exitosamente!');
+  }
+  //Devuelve el objeto de cantidad de problemas registrado por "origen del problema" (DIS,CON y OyM)
+  calculateIndex(company:string,project:string){
+    return this.angularFirestore.collection("Companies").doc(company).collection(project).doc('registro de problemas').valueChanges();
+  }
+
+  async updateProblemAmount(company:string,project:string,updateFieldObj:object){
+    await this.angularFirestore.collection("Companies").doc(company).collection(project).doc('registro de problemas').update(updateFieldObj);
   }
 
 }

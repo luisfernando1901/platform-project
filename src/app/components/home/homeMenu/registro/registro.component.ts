@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 //Importamos el servicio
 import { DatabaseService } from '../../../../services/database.service';
-
+import { Subscription } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 //Todo esto se importa para cambiar de fecha el datepicker
 import {
@@ -11,6 +13,8 @@ import {
   MAT_MOMENT_DATE_ADAPTER_OPTIONS,
 } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { StepperSelectionEvent } from '@angular/cdk/stepper';
+import { MatHorizontalStepper } from '@angular/material/stepper';
 
 @Component({
   selector: 'app-registro',
@@ -32,7 +36,10 @@ import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/materia
     { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
   ]
 })
-export class RegistroComponent implements OnInit {
+export class RegistroComponent implements OnInit, OnDestroy {
+  subscription1: Subscription;
+  unsubscribe:boolean = false;
+  stepperReset:boolean = false;
   isLinear = false;
   frmStepper: FormGroup;
   firstFormGroup: FormGroup;
@@ -143,7 +150,9 @@ export class RegistroComponent implements OnInit {
 
   constructor(private _formBuilder: FormBuilder,
     private _adapter: DateAdapter<any>,
-    private databaseService: DatabaseService) {
+    private databaseService: DatabaseService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router) {
 
   }
 
@@ -196,6 +205,15 @@ export class RegistroComponent implements OnInit {
     this._adapter.setLocale('es');
   }
 
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    //Lógica para que no salte error en el unsubscribe cuando no se haya a subscrito a nada 
+    if (this.unsubscribe) {
+      this.subscription1.unsubscribe();
+    }
+  }
+
   registrar() {
     let d = new Date();
     let day = d.getDate().toString();
@@ -213,15 +231,55 @@ export class RegistroComponent implements OnInit {
 
   submit(){
     let userInfo:any = {};
+    let problemsAmount:any = {}, updateField:string, updateFieldObj:any = {};
     let formArray: object[] = [];
     let formObj = {};
+    let code:string, code_problem:string;
+    let indice:number;
+    let indice_str:string;
     formArray = this.frmStepper.get('steps').value;
     formObj = Object.assign(formArray[0],formArray[1],formArray[2]);
     console.log(formObj);
-    //Aqui obtenemos los parámetros necesarios para llegar al documento de registro de problema en Firecloud
+    //Lógica para definir el código del problema registrado
+    if (formObj['OrigenDelProblema']=='Diseño') {
+      code='DIS';
+      updateField = 'cantidad.DIS';
+    }
+    if (formObj['OrigenDelProblema']=='Construcción') {
+      code='CON';
+      updateField = 'cantidad.CON';
+    }
+    if (formObj['OrigenDelProblema']=='Operación y mantenimiento') {
+      code='OyM';
+      updateField = 'cantidad.OyM';
+    }
+    //Aqui obtenemos los parámetros necesarios para llegar al documento de registro de problema en Firecloud 
     userInfo = JSON.parse(localStorage.getItem('userInfo'));
-    //Aqui falta implementar el llamado al servicio de agregar un Problema
-    this.databaseService.addProblem(userInfo['company'],userInfo['projectName'],formObj);
+    //Usamos un servicio para obtener el índice del nuevo problema a registrar
+    this.subscription1 = this.databaseService.calculateIndex(userInfo['company'],userInfo['projectName']).subscribe(params =>{
+      this.unsubscribe = true;
+      problemsAmount = params;
+      console.log('Este es el problem amount al cual le voy a sumar 1:');
+      console.log(problemsAmount);
+      indice = problemsAmount['cantidad'][code] + 1;
+      //Creamos el updateFieldObj
+      updateFieldObj[updateField] = indice;
+      //console.log(updateFieldObj);
+      //Convertimos el número en string para hacer el append
+      indice_str = indice.toString();
+      code_problem = code + '-' + indice_str;
+      //Servicio de agregar un problema con los parámetros dinámicos de company, project, code, code_pronlem y formObj
+      this.databaseService.addProblem(userInfo['company'],userInfo['projectName'],code,code_problem,formObj);
+      //Hacemos unSubscribe porque en el servicio de abajo vamos a editar el Index de la cantidad de problema, y el subscribe de arriba detectaría que cambió y
+    //haría todo de nuevo y así se convertiría en un bucle infinito
+    this.subscription1.unsubscribe();
+    //Utilizamos el servicio de updateProblemAmount
+    this.databaseService.updateProblemAmount(userInfo['company'],userInfo['projectName'],updateFieldObj);
+    //Limpiamos el formulario
+    this.frmStepper.reset();
+    this.router.navigate(['../'], {relativeTo: this.activatedRoute});
+    });
+    
   }
 
 }
