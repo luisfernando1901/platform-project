@@ -27,6 +27,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 //Es necesario incluir estas 2 para utilizar el datepicker
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+//Google charts
+import { GoogleChartsModule } from 'angular-google-charts';
 
 
 //Importamos reactive forms para poder utilizar el [formGroup]
@@ -70,7 +72,8 @@ import { AdministracionComponent } from './components/home/homeMenu/administraci
     MatIconModule,
     MatProgressBarModule,
     MatSelectModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    GoogleChartsModule
   ],
   providers: [
     AuthService,
