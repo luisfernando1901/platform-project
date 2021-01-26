@@ -29,6 +29,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 //Google charts
 import { GoogleChartsModule } from 'angular-google-charts';
+import { HttpClientModule } from '@angular/common/http';
+
 
 
 //Importamos reactive forms para poder utilizar el [formGroup]
@@ -73,7 +75,8 @@ import { AdministracionComponent } from './components/home/homeMenu/administraci
     MatProgressBarModule,
     MatSelectModule,
     MatSnackBarModule,
-    GoogleChartsModule
+    GoogleChartsModule,
+    HttpClientModule
   ],
   providers: [
     AuthService,

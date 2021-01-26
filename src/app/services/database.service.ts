@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { HttpClient } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
+
 
 
 @Injectable({
@@ -9,7 +12,8 @@ export class DatabaseService {
   storageObj:any = {};
   userEmail:string;
 
-  constructor(private angularFirestore: AngularFirestore) { }
+  constructor(private angularFirestore: AngularFirestore,
+              private http:HttpClient) { }
 
   identifyCompany(){
     this.storageObj = JSON.parse(localStorage.getItem('user')); //Tenemos que parsear el string que devuelve el localstorage
@@ -39,4 +43,25 @@ export class DatabaseService {
     await this.angularFirestore.collection("Companies").doc(company).collection(project).doc('registro de problemas').update(updateFieldObj);
   }
 
+  //Aqui estaba probando funciones para consumir API's - puede que sirva para un futuro.
+  funcion_prueba(){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'x-rapidapi-key':  '41c1cfc11cmsh105143432b738d9p1f8893jsn98ff9b5ea03a',
+        'x-rapidapi-host': 'quotes15.p.rapidapi.com'
+      })
+    };
+    const url:string = 'https://quotes15.p.rapidapi.com/quotes/random/?language_code=es';
+    return this.http.get(url, httpOptions);
+  }
+
+  funcion_prueba2(){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'x-rapidapi-key':  '41c1cfc11cmsh105143432b738d9p1f8893jsn98ff9b5ea03a',
+        'x-rapidapi-host': 'covid-193.p.rapidapi.com'
+      })
+    };
+    return this.http.get('https://covid-193.p.rapidapi.com/countries', httpOptions);
+  }
 }

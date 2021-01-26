@@ -6,19 +6,22 @@
 
 <form [formGroup]="frmStepper" (ngSubmit)="submit()">
 
-<mat-horizontal-stepper [linear]="isLinear" formArrayName="steps" #stepper>
-  <mat-step formGroupName="0" [stepControl]="formArray.get([0])">
+  <mat-horizontal-stepper [linear]="isLinear" formArrayName="steps" #stepper>
+    <mat-step formGroupName="0" [stepControl]="formArray.get([0])">
       <ng-template matStepLabel>Generalidades</ng-template>
-      <mat-form-field class="mr-5">
+      <!-- 
+        <mat-form-field class="mr-5">
         <mat-label>Fecha</mat-label>
         <input matInput [matDatepicker]="picker">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
+
+      -->
       <mat-form-field class="mr-5">
         <mat-label>Sistema</mat-label>
         <mat-select formControlName="Sistema">
-          <mat-option *ngFor="let sistema of sistemas" [value]="sistema" >
+          <mat-option *ngFor="let sistema of sistemas" [value]="sistema">
             {{sistema}}
           </mat-option>
         </mat-select>
@@ -58,10 +61,10 @@
       <div>
         <button mat-button type="button" matStepperNext>Next</button>
       </div>
-  </mat-step>
-  <!--Step 2-->
-  <mat-step formGroupName="1" [stepControl]="formArray.get([1])" label="Detalle">
-    
+    </mat-step>
+    <!--Step 2-->
+    <mat-step formGroupName="1" [stepControl]="formArray.get([1])" label="Detalle">
+
       <mat-form-field class="mr-5">
         <mat-label>Origen del problema</mat-label>
         <mat-select formControlName="OrigenDelProblema">
@@ -107,9 +110,21 @@
         <input matInput type="number" formControlName="Costo">
         <span matPrefix>S/.&nbsp;</span>
       </mat-form-field>
-      <mat-form-field class="mr-5">
+      <!-- 
+        <mat-form-field class="mr-5">
         <mat-label>Tiempo</mat-label>
         <input matInput type="number" formControlName="Tiempo">
+      </mat-form-field>
+
+      -->
+      <mat-form-field>
+        <mat-label>Tiempo de duración</mat-label>
+        <mat-date-range-input [rangePicker]="picker">
+          <input matStartDate formControlName="DiaInicio" placeholder="Fecha inicio">
+          <input matEndDate formControlName="DiaFin" placeholder="Fecha fin">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
       </mat-form-field>
       <br>
       <div class="container-fluid p-0">
@@ -148,9 +163,9 @@
         <button mat-button type="button" matStepperPrevious>Back</button>
         <button mat-button type="button" matStepperNext>Next</button>
       </div>
-  </mat-step>
-  <!--Step 3-->
-  <mat-step formGroupName="2" [stepControl]="formArray.get([2])" label="Lección aprendida">
+    </mat-step>
+    <!--Step 3-->
+    <mat-step formGroupName="2" [stepControl]="formArray.get([2])" label="Lección aprendida">
       <mat-form-field class="mr-5">
         <mat-label>Tipo de lección aprendida</mat-label>
         <mat-select formControlName="TipoDeLeccionAprendida">
@@ -217,6 +232,6 @@
         <button mat-button type="submit" [disabled]="!frmStepper.valid" (click)="registrar()">Registrar</button>
         <button mat-button type="button" (click)="stepper.reset()">Reset</button>
       </div>
-  </mat-step>
-</mat-horizontal-stepper>
+    </mat-step>
+  </mat-horizontal-stepper>
 </form>

@@ -177,7 +177,9 @@ export class RegistroComponent implements OnInit, OnDestroy {
           ImpactoEnUsuarios: [''],
           PersonalEncargado: [''],
           Costo: [''],
-          Tiempo: [''],
+          //Tiempo: [''],
+          DiaInicio: [''],
+          DiaFin: [''],
           DescripcionDelProblema: [''],
           Causa: [''],
           Consecuencia: [''],
@@ -238,8 +240,15 @@ export class RegistroComponent implements OnInit, OnDestroy {
     let code: string, code_problem: string;
     let indice: number;
     let indice_str: string;
+    let aux1:any = {};
+    let aux2:any = {};
     formArray = this.frmStepper.get('steps').value;
+    //Cambiamos la estructura de fecha para que solo sea dia mes y año (Recordar que enero simboliza el 0 y diciembre el 11)
+    aux1 = formArray[1]['DiaInicio']['_i'];
+    aux2 = formArray[1]['DiaFin']['_i'];
     formObj = Object.assign(formArray[0], formArray[1], formArray[2]);
+    formObj['DiaInicio'] = aux1;
+    formObj['DiaFin'] = aux2;
     console.log(formObj);
     //Lógica para definir el código del problema registrado
     if (formObj['OrigenDelProblema'] == 'Diseño') {

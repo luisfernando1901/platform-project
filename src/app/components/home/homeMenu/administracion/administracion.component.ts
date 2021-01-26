@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DatabaseService } from '../../../../services/database.service';
+
 
 @Component({
   selector: 'app-administracion',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdministracionComponent implements OnInit {
 
-  constructor() { }
+  constructor(private databaseService: DatabaseService) { }
 
   ngOnInit(): void {
+    this.databaseService.funcion_prueba().subscribe(params => {
+      console.log(params['content']);
+    });
+    this.databaseService.funcion_prueba2().subscribe(params => console.log(params));
   }
 
 }
