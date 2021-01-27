@@ -64,10 +64,13 @@
     </mat-step>
     <!--Step 2-->
     <mat-step formGroupName="1" [stepControl]="formArray.get([1])" label="Detalle">
-
+      <mat-form-field class="mr-5">
+        <mat-label>Código</mat-label>
+        <input matInput disabled [value]="codigo">
+      </mat-form-field>
       <mat-form-field class="mr-5">
         <mat-label>Origen del problema</mat-label>
-        <mat-select formControlName="OrigenDelProblema">
+        <mat-select (openedChange)="setCode()" formControlName="OrigenDelProblema">
           <mat-option *ngFor="let origenDeProblema of origenesDeProblema" [value]="origenDeProblema">
             {{origenDeProblema}}
           </mat-option>
@@ -107,8 +110,15 @@
       </mat-form-field>
       <mat-form-field class="mr-5">
         <mat-label>Costo</mat-label>
-        <input matInput type="number" formControlName="Costo">
-        <span matPrefix>S/.&nbsp;</span>
+        <input matInput type="number" placeholder="Ejm: 3058.85" formControlName="Costo">
+      </mat-form-field>
+      <mat-form-field class="mr-5">
+        <mat-label>Tipo de moneda</mat-label>
+        <mat-select formControlName="TipoMoneda">
+          <mat-option *ngFor="let moneda of ['Soles','Dólares']" [value]="moneda">
+            {{moneda}}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
       <!-- 
         <mat-form-field class="mr-5">
@@ -166,19 +176,11 @@
     </mat-step>
     <!--Step 3-->
     <mat-step formGroupName="2" [stepControl]="formArray.get([2])" label="Lección aprendida">
-      <mat-form-field class="mr-5">
-        <mat-label>Tipo de lección aprendida</mat-label>
+      <mat-form-field class="mr-5 text-fit">
+        <mat-label class="text-fit">Tipo de lección aprendida</mat-label>
         <mat-select formControlName="TipoDeLeccionAprendida">
           <mat-option *ngFor="let tipoDeLeccionAprendida of tiposDeLeccionAprendida" [value]="tipoDeLeccionAprendida">
             {{tipoDeLeccionAprendida}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field class="mr-5 text-fit">
-        <mat-label class="text-fit">(REVISAR)¿A quien debe ser reportada esta lección aprendida?</mat-label>
-        <mat-select formControlName="Reportado">
-          <mat-option *ngFor="let encargado of encargados" [value]="encargado">
-            {{encargado}}
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -202,35 +204,23 @@
         <div class="row">
           <div class="col">
             <mat-form-field class="mr-5 big-text">
-              <mat-label>¿Qué resultado se obtendría de aplicar la mejora propuesta?</mat-label>
-              <textarea matInput class="big-text" formControlName="ResultadoPropuestaEspecialista"></textarea>
-            </mat-form-field>
-          </div>
-          <div class="col">
-            <mat-form-field class="mr-5 big-text">
               <mat-label>Mejora propuesta por el administrador</mat-label>
               <textarea matInput class="big-text" formControlName="PropuestaAdministrador"></textarea>
             </mat-form-field>
           </div>
-        </div>
-      </div>
-      <div class="container-fluid p-0">
-        <div class="row">
           <div class="col">
             <mat-form-field class="mr-5 big-text">
-              <mat-label>¿Qué resultado se obtendría de aplicar la mejora propuesta?</mat-label>
-              <textarea matInput class="big-text" formControlName="ResultadoPropuestaAdministrador"></textarea>
+              <mat-label>¿Qué resultado se obtendría de aplicar las mejoras propuestas?</mat-label>
+              <textarea matInput class="big-text" formControlName="ResultadoPropuesta"></textarea>
             </mat-form-field>
-          </div>
-          <div class="col">
-
           </div>
         </div>
       </div>
+
       <div class="mt-3">
         <button mat-button type="button" matStepperPrevious>Back</button>
         <button mat-button type="submit" [disabled]="!frmStepper.valid" (click)="registrar()">Registrar</button>
-        <button mat-button type="button" (click)="stepper.reset()">Reset</button>
+        <button mat-button type="button" (click)="stepper.reset();codigo=''">Reset</button>
       </div>
     </mat-step>
   </mat-horizontal-stepper>

@@ -37,8 +37,9 @@ import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/materia
   ]
 })
 export class RegistroComponent implements OnInit, OnDestroy {
-  subscription1: Subscription;
-  unsubscribe: boolean = false;
+  subscription1: Subscription; subscription2: Subscription;
+  unsubscribe: boolean = false; unsubscribe2: boolean;
+  codigo: string = '';
   stepperReset: boolean = false;
   isLinear = false;
   frmStepper: FormGroup;
@@ -177,9 +178,9 @@ export class RegistroComponent implements OnInit, OnDestroy {
           ImpactoEnUsuarios: [''],
           PersonalEncargado: [''],
           Costo: [''],
-          //Tiempo: [''],
-          DiaInicio: [''],
-          DiaFin: [''],
+          TipoMoneda: [''],
+          DiaInicio: ['', Validators.required],
+          DiaFin: ['', Validators.required],
           DescripcionDelProblema: [''],
           Causa: [''],
           Consecuencia: [''],
@@ -188,12 +189,10 @@ export class RegistroComponent implements OnInit, OnDestroy {
         this._formBuilder.group({
           // ... form controls for our step
           TipoDeLeccionAprendida: [''],
-          Reportado: [''],
           Rescatar: [''],
           PropuestaEspecialista: [''],
-          ResultadoPropuestaEspecialista: [''],
           PropuestaAdministrador: [''],
-          ResultadoPropuestaAdministrador: ['']
+          ResultadoPropuesta: ['']
         })
         // ... more form groups for each step we have
       ]),
@@ -215,6 +214,9 @@ export class RegistroComponent implements OnInit, OnDestroy {
     if (this.unsubscribe) {
       this.subscription1.unsubscribe();
     }
+    if (this.unsubscribe2) {
+      this.subscription2.unsubscribe();
+    }
   }
 
   registrar() {
@@ -226,6 +228,40 @@ export class RegistroComponent implements OnInit, OnDestroy {
 
     console.log(fulldate);
 
+  }
+
+  setCode() {
+    let userInfo: any = {};
+    let code: string = '', origen: string;
+    let problemsAmount: any = {};
+    let indice: number, indice_str: string, code_problem: string;
+    let formArray: object[] = [];
+    formArray = this.frmStepper.get('steps').value;
+    origen = formArray[1]['OrigenDelProblema']
+    //Lógica para definir el código del problema registrado
+    if (origen == 'Diseño') {
+      code = 'DIS';
+    }
+    if (origen == 'Construcción') {
+      code = 'CON';
+    }
+    if (origen == 'Operación y mantenimiento') {
+      code = 'OyM';
+    }
+    if (code != '') {
+      //console.log(code);
+      userInfo = JSON.parse(localStorage.getItem('userInfo'));
+      this.subscription2 = this.databaseService.calculateIndex(userInfo['company'], userInfo['projectName']).subscribe(params => {
+        this.unsubscribe2 = true;
+        problemsAmount = params;
+        indice = problemsAmount['cantidad'][code] + 1;
+        //Convertimos el número en string para hacer el append
+        indice_str = indice.toString();
+        code_problem = code + '-' + indice_str;
+        this.codigo = code_problem;
+        //console.log(this.codigo);
+      });
+    }
   }
   // formArray getter
   get formArray() {
@@ -240,8 +276,8 @@ export class RegistroComponent implements OnInit, OnDestroy {
     let code: string, code_problem: string;
     let indice: number;
     let indice_str: string;
-    let aux1:any = {};
-    let aux2:any = {};
+    let aux1: any = {};
+    let aux2: any = {};
     formArray = this.frmStepper.get('steps').value;
     //Cambiamos la estructura de fecha para que solo sea dia mes y año (Recordar que enero simboliza el 0 y diciembre el 11)
     aux1 = formArray[1]['DiaInicio']['_i'];
@@ -280,12 +316,12 @@ export class RegistroComponent implements OnInit, OnDestroy {
       code_problem = code + '-' + indice_str;
       //Servicio de agregar un problema con los parámetros dinámicos de company, project, code, code_pronlem y formObj
       this.databaseService.addProblem(userInfo['company'], userInfo['projectName'], code, code_problem, formObj)
-      .then(done =>{
-        this.openSnackBar('Registro exitoso!');
-      })
-      .catch(error =>{
-        this.openSnackBar('Registro fallido');
-      });
+        .then(done => {
+          this.openSnackBar('Registro exitoso!');
+        })
+        .catch(error => {
+          this.openSnackBar('Registro fallido');
+        });
       //Hacemos unSubscribe porque en el servicio de abajo vamos a editar el Index de la cantidad de problema, y el subscribe de arriba detectaría que cambió y
       //haría todo de nuevo y así se convertiría en un bucle infinito
       this.subscription1.unsubscribe();
@@ -299,7 +335,7 @@ export class RegistroComponent implements OnInit, OnDestroy {
   }
   //Funcion de notificación de problema registrado o con problemas de registrar
   openSnackBar(message: string) {
-    this._snackBar.open(message,'', {
+    this._snackBar.open(message, '', {
       duration: 3000,
     });
   }
