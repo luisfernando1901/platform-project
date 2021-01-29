@@ -15,3 +15,10 @@
   width: 500px;
 }
 
+.multiline-tooltip{
+  white-space: pre-line;
+}
+
+.custom-tooltip {
+  font-size:12px;
+}

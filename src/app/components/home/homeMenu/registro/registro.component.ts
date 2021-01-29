@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 //Importamos el servicio
 import { DatabaseService } from '../../../../services/database.service';
@@ -34,7 +34,8 @@ import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/materia
       deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
     },
     { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
-  ]
+  ],
+  encapsulation: ViewEncapsulation.None
 })
 export class RegistroComponent implements OnInit, OnDestroy {
   subscription1: Subscription; subscription2: Subscription;
