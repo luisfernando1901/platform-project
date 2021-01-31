@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   empresa: string;
+  wrongAlert:boolean = false;
   constructor(private authService:AuthService,
     private router:Router) { }
 
@@ -23,6 +24,8 @@ export class LoginComponent implements OnInit {
     console.log(this.authService.signedIn);
     if (this.authService.signedIn == true)
       this.router.navigate(['/projects']);
+    else
+      this.wrongAlert = true;
 
   }
 

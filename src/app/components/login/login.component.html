@@ -10,6 +10,12 @@
             <label for="userPassword">Password</label>
             <input id="userPassword" class="form-control" type="password" #userPassword>
         </div>
-        <button (click)="login(userEmail.value,userPassword.value)" type="button" class="btn btn-primary btn-block">Login</button>
+        <div class="text-center mb-3">
+            <mat-error *ngIf="this.wrongAlert"><small>Verifique que el usuario y contraseña sean los correctos</small></mat-error>
+        </div>
+        <div class="pt-3">
+            <button (click)="login(userEmail.value,userPassword.value)" type="button" class="btn btn-primary btn-block">Login</button>
+        </div>
+        
     </div>
 </div>
