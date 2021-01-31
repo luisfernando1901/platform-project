@@ -22,3 +22,6 @@
 .custom-tooltip {
   font-size:12px;
 }
+.mat-form-field-label mat-label {
+  pointer-events: auto;
+}

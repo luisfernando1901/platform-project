@@ -48,104 +48,104 @@ export class RegistroComponent implements OnInit, OnDestroy {
   secondFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
   sistemas: string[] = [
-    'Arquitectura',
-    'Instalaciones Sanitarias',
-    'Instalaciones Eléctricas',
-    'Iluminación',
-    'HVAC',
-    'Sistema contra incendio',
     'Accesibilidad',
+    'Arquitectura',
     'Ascensores',
+    'HVAC',
+    'Iluminación',
+    'Instalaciones Eléctricas',
+    'Instalaciones Sanitarias',
     'Ruidos y vibraciones ambientales',
-    'Ventilación y climatización',
+    'Sistema contra incendio',
+    'Sistema de emergencia',
     'Sistema Mecánico',
-    'Sistema de emergencia'
+    'Ventilación y climatización'
   ];
   efectos: string[] = [
     'Demolición',
     'Reconstrucción',
     'Reinstalación',
     'Remodelación',
-    'Retrabajo',
-    'Reparación'
+    'Reparación',
+    'Retrabajo'
   ];
   encargados: string[] = [
+    'Administrador del edificio',
     'Cliente',
-    'Proyectista',
     'Contratista',
-    'Administrador del edificio'
+    'Proyectista'
   ];
   ubicaciones: string[] = [
-    'Lobby de ingreso',
-    'Hall de ascensores',
-    'Sótano',
-    'Oficinas',
-    'Cuarto de máquinas',
-    'Fachada',
+    'Azotea',
     'Áreas comunes',
     'Cuarto de Acopio',
+    'Cuarto de Bombas',
+    'Cuarto de máquinas',
     'Estacionamiento',
-    'Red de tubería',
-    'Azotea',
+    'Fachada',
+    'Hall de ascensores',
+    'Lobby de ingreso',
     'Oficinas',
-    'Cuarto de Bombas'
+    'Oficinas',
+    'Red de tubería',
+    'Sótano'
   ];
   componentes: string[] = [
-    'Piso cerámico',
-    'Zócalo cerámico',
-    'Piso porcelanato',
-    'Zócalo porcelanato',
-    'Muro de drywall',
-    'Muro estructural',
-    'Columna estructural',
-    'Viga estructural',
     'Ascensor',
     'Bombas de agua',
-    'Luminarias LED',
-    'Medidores de agua',
-    'Inodoro',
-    'Urinario',
-    'Lavatorio',
-    'Tubería',
-    'Sistema de Ionización',
-    'Muro cortina',
-    'Chiller',
-    'Sistema Aire condicionado',
-    'Luces de Emergencia',
-    'Sistema de Extracción',
+    'Bombas Hidráulicas',
     'Cables',
-    'Luminarias',
-    'Ventanas',
+    'Chiller',
+    'Columna estructural',
+    'Inodoro',
     'Intercomunicador',
+    'Lavatorio',
+    'Luces de Emergencia',
+    'Luminarias LED',
+    'Luminarias',
+    'Medidores de agua',
+    'Muro cortina',
+    'Muro de drywall',
+    'Muro estructural',
     'Pintura de muro',
-    'Bombas Hidraulicas'
+    'Piso cerámico',
+    'Piso porcelanato',
+    'Sistema Aire condicionado',
+    'Sistema de Extracción',
+    'Sistema de Ionización',
+    'Tubería',
+    'Urinario',
+    'Ventanas',
+    'Viga estructural',
+    'Zócalo cerámico',
+    'Zócalo porcelanato'
   ];
   marcaComponentes: string[] = [
-    'San Lorenzo',
     'Celima',
     'Phillips',
     'Samsung',
-    'Vainsa',
+    'San Lorenzo',
+    'ThyssenKrupp',
     'Trébol',
-    'ThyssenKrupp'
+    'Vainsa'
   ];
   proveedores: string[] = [
     'Decor Center',
     'Maestro',
-    'Sodimac',
     'Promart',
+    'Sodimac',
     'ThyssenKrupp'
   ];
   tiposDeLeccionAprendida: string[] = [
-    'Suposiciones de diseño incorrectas',
     'Defectos de diseño',
     'Especificaciones técnicas deficientes',
     'Malas prácticas constructivas',
-    'Problemas de mantenimiento'
+    'Problemas de mantenimiento',
+    'Suposiciones de diseño incorrectas'
   ];
   origenesDeProblema: string[] = [
-    'Diseño',
     'Construcción',
+    'Diseño',
     'Operación y mantenimiento'
   ];
   niveles: string[] = ['Alto', 'Medio', 'Bajo'];

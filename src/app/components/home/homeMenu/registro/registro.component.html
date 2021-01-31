@@ -10,7 +10,7 @@
     <mat-step formGroupName="0" [stepControl]="formArray.get([0])">
       <ng-template matStepLabel>Generalidades</ng-template>
       <!-- 
-        <mat-form-field class="mr-3">
+        <mat-form-field class="mr-5">
         <mat-label>Fecha</mat-label>
         <input matInput [matDatepicker]="picker">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -18,34 +18,34 @@
       </mat-form-field>
 
       -->
-      <mat-form-field>
-        <mat-label>Sistema</mat-label>
+      <mat-form-field class="mr-5">
+        <mat-label>Sistema <mat-icon matTooltip="Sistema donde se identifica el problema." matTooltipClass="custom-tooltip" aria-hidden="false" aria-label="Example home icon">help</mat-icon>
+        </mat-label>
         <mat-select formControlName="Sistema">
           <mat-option *ngFor="let sistema of sistemas" [value]="sistema">
             {{sistema}}
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-icon class="mr-3" matTooltip="Sistema donde se identifica el problema." matTooltipClass="custom-tooltip" aria-hidden="false" aria-label="Example home icon">help</mat-icon>
-      <mat-form-field>
-        <mat-label>Ubicación</mat-label>
+      <mat-form-field class="mr-5">
+        <mat-label>Ubicación <mat-icon matTooltip="Lugar donde se origina el problema." matTooltipClass="custom-tooltip" aria-hidden="false" aria-label="Example home icon">help</mat-icon>
+        </mat-label>
         <mat-select formControlName="Ubicacion">
           <mat-option *ngFor="let ubicacion of ubicaciones" [value]="ubicacion">
             {{ubicacion}}
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-icon class="mr-3" matTooltip="Lugar donde se origina el problema." matTooltipClass="custom-tooltip" aria-hidden="false" aria-label="Example home icon">help</mat-icon>
-      <mat-form-field>
-        <mat-label>Componente</mat-label>
+      <mat-form-field class="mr-5">
+        <mat-label>Componente <mat-icon matTooltip="Componente afectado por el problema." matTooltipClass="custom-tooltip" aria-hidden="false" aria-label="Example home icon">help</mat-icon>
+        </mat-label>
         <mat-select formControlName="Componente">
           <mat-option *ngFor="let componente of componentes" [value]="componente">
             {{componente}}
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-icon class="mr-3" matTooltip="Componente afectado por el problema." matTooltipClass="custom-tooltip" aria-hidden="false" aria-label="Example home icon">help</mat-icon>
-      <mat-form-field class="mr-3">
+      <mat-form-field class="mr-5">
         <mat-label>Marca del componente</mat-label>
         <mat-select formControlName="MarcaDelComponente">
           <mat-option *ngFor="let marcaComponente of marcaComponentes" [value]="marcaComponente">
@@ -53,15 +53,15 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-form-field>
-        <mat-label>Proveedor</mat-label>
+      <mat-form-field class="mr-5">
+        <mat-label>Proveedor <mat-icon matTooltip="Empresa o personal encargado del suministro del sistema o componente." matTooltipClass="custom-tooltip" aria-hidden="false" aria-label="Example home icon">help</mat-icon>
+        </mat-label>
         <mat-select formControlName="Proveedor">
           <mat-option *ngFor="let proveedor of proveedores" [value]="proveedor">
             {{proveedor}}
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-icon class="mr-3" matTooltip="Empresa o personal encargado del suministro del sistema o componente." matTooltipClass="custom-tooltip" aria-hidden="false" aria-label="Example home icon">help</mat-icon>
       <div>
         <button mat-button type="button" matStepperNext>Next</button>
       </div>
@@ -69,60 +69,60 @@
     </mat-step>
     <!--Step 2-->
     <mat-step formGroupName="1" [stepControl]="formArray.get([1])" label="Detalle">
-      <mat-form-field class="mr-3">
+      <mat-form-field class="mr-5">
         <mat-label>Código</mat-label>
         <input matInput disabled [value]="codigo">
       </mat-form-field>
-      <mat-form-field class="">
-        <mat-label>Origen del problema</mat-label>
+      <mat-form-field class="mr-5">
+        <mat-label>Origen del problema <mat-icon matTooltip="Etapa en la cual se origina el problema." matTooltipClass="custom-tooltip" aria-hidden="false" aria-label="Example home icon">help</mat-icon>
+        </mat-label>
         <mat-select (openedChange)="setCode()" formControlName="OrigenDelProblema">
           <mat-option *ngFor="let origenDeProblema of origenesDeProblema" [value]="origenDeProblema">
             {{origenDeProblema}}
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-icon class="mr-3" matTooltip="Etapa en la cual se origina el problema." matTooltipClass="custom-tooltip" aria-hidden="false" aria-label="Example home icon">help</mat-icon>
-      <mat-form-field class="">
-        <mat-label>Efecto</mat-label>
+      <mat-form-field class="mr-5">
+        <mat-label>Efecto <mat-icon matTooltip="Lo que involucraría llevarse a cabo para solucionar el problema." matTooltipClass="custom-tooltip" aria-hidden="false" aria-label="Example home icon">help</mat-icon>
+        </mat-label>
         <mat-select formControlName="Efecto">
           <mat-option *ngFor="let efecto of efectos" [value]="efecto">
             {{efecto}}
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-icon class="mr-3" matTooltip="Lo que involucraría llevarse a cabo para solucionar el problema." matTooltipClass="custom-tooltip" aria-hidden="false" aria-label="Example home icon">help</mat-icon>
-      <mat-form-field class="">
-        <mat-label>Severidad</mat-label>
+      <mat-form-field class="mr-5">
+        <mat-label>Severidad <mat-icon matTooltip='Alta: Demolición,reinstalación o reconstrucción &#13; Media: Remodelación o retrabajo &#13; Baja: Reparación' matTooltipClass="custom-tooltip multiline-tooltip" aria-hidden="false" aria-label="Example home icon">help</mat-icon>
+        </mat-label>
         <mat-select formControlName="Severidad">
           <mat-option *ngFor="let nivel of niveles" [value]="nivel">
             {{nivel}}
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-icon class="mr-3" matTooltip='Alta: Demolición,reinstalación o reconstrucción &#13; Media: Remodelación o retrabajo &#13; Baja: Reparación' matTooltipClass="custom-tooltip multiline-tooltip" aria-hidden="false" aria-label="Example home icon">help</mat-icon>
-      <mat-form-field class="">
-        <mat-label>Impacto en usuarios</mat-label>
+      <mat-form-field class="mr-5">
+        <mat-label>Impacto en usuarios <mat-icon matTooltip='Efecto del problema sobre los usuarios. &#13; Alto: Usuarios deben ser reubicados temporalmente. &#13; Medio: Suspensión temporal de servicios (agua,luz,HVAC). &#13; Bajo: Molestia temporal a los usuarios' matTooltipClass="custom-tooltip multiline-tooltip" aria-hidden="false" aria-label="Example home icon">help</mat-icon>
+        </mat-label>
         <mat-select formControlName="ImpactoEnUsuarios">
           <mat-option *ngFor="let nivel of niveles" [value]="nivel">
             {{nivel}}
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-icon class="mr-3" matTooltip='Efecto del problema sobre los usuarios. &#13; Alto: Usuarios deben ser reubicados temporalmente. &#13; Medio: Suspensión temporal de servicios (agua,luz,HVAC). &#13; Bajo: Molestia temporal a los usuarios' matTooltipClass="custom-tooltip multiline-tooltip" aria-hidden="false" aria-label="Example home icon">help</mat-icon>
-      <mat-form-field class="">
-        <mat-label>Personal encargado</mat-label>
+      <mat-form-field class="mr-5">
+        <mat-label>Personal encargado <mat-icon matTooltip='Responsable de dar solución al problema y lo que involucre.' matTooltipClass="custom-tooltip multiline-tooltip" aria-hidden="false" aria-label="Example home icon">help</mat-icon>
+        </mat-label>
         <mat-select formControlName="PersonalEncargado">
           <mat-option *ngFor="let encargado of encargados" [value]="encargado">
             {{encargado}}
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-icon class="mr-3" matTooltip='Responsable de dar solución al problema y lo que involucre.' matTooltipClass="custom-tooltip multiline-tooltip" aria-hidden="false" aria-label="Example home icon">help</mat-icon>
-      <mat-form-field class="mr-3">
+      <mat-form-field class="mr-5">
         <mat-label>Costo</mat-label>
         <input matInput type="number" placeholder="Ejm: 3058.85" formControlName="Costo">
       </mat-form-field>
-      <mat-form-field class="mr-3">
+      <mat-form-field class="mr-5">
         <mat-label>Tipo de moneda</mat-label>
         <mat-select formControlName="TipoMoneda">
           <mat-option *ngFor="let moneda of ['Soles','Dólares']" [value]="moneda">
@@ -131,7 +131,7 @@
         </mat-select>
       </mat-form-field>
       <!-- 
-        <mat-form-field class="mr-3">
+        <mat-form-field class="mr-5">
         <mat-label>Tiempo</mat-label>
         <input matInput type="number" formControlName="Tiempo">
       </mat-form-field>
@@ -152,40 +152,38 @@
         <div class="row">
           <div class="col">
             <mat-form-field class="big-text">
-              <mat-label>Descripción del problema</mat-label>
+              <mat-label>Descripción del problema <mat-icon matTooltip='Detalle del problema ocurrido.' matTooltipClass="custom-tooltip multiline-tooltip" aria-hidden="false" aria-label="Example home icon">help</mat-icon></mat-label>
               <textarea matInput class="big-text" formControlName="DescripcionDelProblema"></textarea>
             </mat-form-field>
           </div>
-          <mat-icon class="mr-3" matTooltip='Detalle del problema ocurrido.' matTooltipClass="custom-tooltip multiline-tooltip" aria-hidden="false" aria-label="Example home icon">help</mat-icon>
-      
+          
           <div class="col">
             <mat-form-field class="big-text">
-              <mat-label>Causa</mat-label>
+              <mat-label>Causa <mat-icon matTooltip='Detalle la causa del problema ocurrido.' matTooltipClass="custom-tooltip multiline-tooltip" aria-hidden="false" aria-label="Example home icon">help</mat-icon></mat-label>
               <textarea matInput class="big-text" formControlName="Causa"></textarea>
             </mat-form-field>
           </div>
-          <mat-icon class="mr-3" matTooltip='Detalle la causa del problema ocurrido.' matTooltipClass="custom-tooltip multiline-tooltip" aria-hidden="false" aria-label="Example home icon">help</mat-icon>
-      
+          
         </div>
       </div>
       <div class="container-fluid p-0">
         <div class="row">
           <div class="col">
             <mat-form-field class="big-text">
-              <mat-label>Consecuencia</mat-label>
+              <mat-label>Consecuencia <mat-icon matTooltip='Impacto del problema ocurrido.' matTooltipClass="custom-tooltip multiline-tooltip" aria-hidden="false" aria-label="Example home icon">help</mat-icon></mat-label>
               <textarea matInput class="big-text" formControlName="Consecuencia"></textarea>
             </mat-form-field>
           </div>
-          <mat-icon class="mr-3" matTooltip='Impacto del problema ocurrido.' matTooltipClass="custom-tooltip multiline-tooltip" aria-hidden="false" aria-label="Example home icon">help</mat-icon>
+          
       
           
           <div class="col">
             <mat-form-field class="big-text">
-              <mat-label>Acción emprendida</mat-label>
+              <mat-label>Acción emprendida <mat-icon matTooltip='Acción emprendida para resolver el problema.' matTooltipClass="custom-tooltip multiline-tooltip" aria-hidden="false" aria-label="Example home icon">help</mat-icon></mat-label>
               <textarea matInput class="big-text" formControlName="AccionEmprendida"></textarea>
             </mat-form-field>
           </div>
-          <mat-icon class="mr-3" matTooltip='Acción emprendida para resolver el problema.' matTooltipClass="custom-tooltip multiline-tooltip" aria-hidden="false" aria-label="Example home icon">help</mat-icon>
+          
       
         </div>
       </div>
