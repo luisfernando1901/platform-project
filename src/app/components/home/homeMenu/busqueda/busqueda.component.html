@@ -1,8 +1,69 @@
-<p>busqueda works!</p>
-<mat-form-field appearance="fill">
-    <mat-label>Choose a date</mat-label>
-    <input matInput [matDatepicker]="picker">
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-</mat-form-field>
-  
+<div class="container-fluid mt-5">
+    <div class="row">
+        <div class="col-4">
+            <div class="input-group mt-3 buscar">
+                <input type="text" class="form-control" placeholder="Código" aria-label="Recipient's username"
+                    aria-describedby="button-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-8">
+            <form>
+                <mat-form-field class="mr-5">
+                    <mat-label>Estado <mat-icon matTooltip='Situación actual del problema  &#13; Pendiente: Problema aún por solucionar.  &#13; Completado: Problema solucionado.' matTooltipClass="custom-tooltip multiline-tooltip" aria-hidden="false" aria-label="Example home icon">help</mat-icon>
+                    </mat-label>
+                    <mat-select>
+                      <mat-option *ngFor="let estado of estados" [value]="estado">
+                        {{estado}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                <mat-form-field class="mr-5">
+                    <mat-label>Sistema <mat-icon matTooltip="Sistema donde se identifica el problema."
+                            matTooltipClass="custom-tooltip" aria-hidden="false" aria-label="Example home icon">help
+                        </mat-icon>
+                    </mat-label>
+                    <mat-select>
+                        <mat-option *ngFor="let sistema of sistemas" [value]="sistema">
+                            {{sistema}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field class="mr-5">
+                    <mat-label>Impacto en usuarios <mat-icon
+                            matTooltip='Efecto del problema sobre los usuarios. &#13; Alto: Usuarios deben ser reubicados temporalmente. &#13; Medio: Suspensión temporal de servicios (agua,luz,HVAC). &#13; Bajo: Molestia temporal a los usuarios'
+                            matTooltipClass="custom-tooltip multiline-tooltip" aria-hidden="false"
+                            aria-label="Example home icon">help</mat-icon>
+                    </mat-label>
+                    <mat-select>
+                        <mat-option *ngFor="let nivel of niveles" [value]="nivel">
+                            {{nivel}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field class="mr-5">
+                    <mat-label>Severidad <mat-icon
+                            matTooltip='Alta: Demolición,reinstalación o reconstrucción &#13; Media: Remodelación o retrabajo &#13; Baja: Reparación'
+                            matTooltipClass="custom-tooltip multiline-tooltip" aria-hidden="false"
+                            aria-label="Example home icon">help</mat-icon>
+                    </mat-label>
+                    <mat-select>
+                        <mat-option *ngFor="let nivel of niveles" [value]="nivel">
+                            {{nivel}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field class="mr-5">
+                    <mat-label>Costo menor a</mat-label>
+                    <input matInput type="number">
+                </mat-form-field>
+                <mat-form-field class="mr-5">
+                    <mat-label>Costo mayor a</mat-label>
+                    <input matInput type="number">
+                </mat-form-field>
+            </form>
+        </div>
+    </div>
+</div>

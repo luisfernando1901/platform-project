@@ -149,6 +149,7 @@ export class RegistroComponent implements OnInit, OnDestroy {
     'Operación y mantenimiento'
   ];
   niveles: string[] = ['Alto', 'Medio', 'Bajo'];
+  estados: string[] = ['Pendiente','Solucionado'];
 
   constructor(private _formBuilder: FormBuilder,
     private _adapter: DateAdapter<any>,
@@ -169,7 +170,8 @@ export class RegistroComponent implements OnInit, OnDestroy {
           Ubicacion: [''],
           Componente: [''],
           MarcaDelComponente: [''],
-          Proveedor: ['']
+          Proveedor: [''],
+          Estado:['']
         }),
         this._formBuilder.group({
           // ... form controls for our step

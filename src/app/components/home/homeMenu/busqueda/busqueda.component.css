@@ -1,0 +1,13 @@
+.buscar {
+  width: 300px;
+}
+.multiline-tooltip {
+  white-space: pre-line;
+}
+
+.custom-tooltip {
+  font-size: 12px;
+}
+.mat-form-field-label mat-label {
+  pointer-events: auto;
+}
