@@ -5,16 +5,16 @@
                 <input type="text" class="form-control" placeholder="Código" aria-label="Recipient's username"
                     aria-describedby="button-addon2">
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
+                    <button class="btn btn-outline-secondary" type="button" id="button-addon2">Buscar</button>
                 </div>
             </div>
         </div>
         <div class="col-8">
-            <form>
+            <form [formGroup]="queryForm" (ngSubmit)="search()">
                 <mat-form-field class="mr-5">
                     <mat-label>Estado <mat-icon matTooltip='Situación actual del problema  &#13; Pendiente: Problema aún por solucionar.  &#13; Completado: Problema solucionado.' matTooltipClass="custom-tooltip multiline-tooltip" aria-hidden="false" aria-label="Example home icon">help</mat-icon>
                     </mat-label>
-                    <mat-select>
+                    <mat-select formControlName="Estado" required>
                       <mat-option *ngFor="let estado of estados" [value]="estado">
                         {{estado}}
                       </mat-option>
@@ -25,7 +25,7 @@
                             matTooltipClass="custom-tooltip" aria-hidden="false" aria-label="Example home icon">help
                         </mat-icon>
                     </mat-label>
-                    <mat-select>
+                    <mat-select formControlName="Sistema" required>
                         <mat-option *ngFor="let sistema of sistemas" [value]="sistema">
                             {{sistema}}
                         </mat-option>
@@ -37,7 +37,7 @@
                             matTooltipClass="custom-tooltip multiline-tooltip" aria-hidden="false"
                             aria-label="Example home icon">help</mat-icon>
                     </mat-label>
-                    <mat-select>
+                    <mat-select formControlName="Impacto" required>
                         <mat-option *ngFor="let nivel of niveles" [value]="nivel">
                             {{nivel}}
                         </mat-option>
@@ -49,21 +49,80 @@
                             matTooltipClass="custom-tooltip multiline-tooltip" aria-hidden="false"
                             aria-label="Example home icon">help</mat-icon>
                     </mat-label>
-                    <mat-select>
+                    <mat-select formControlName="Severidad" required>
                         <mat-option *ngFor="let nivel of niveles" [value]="nivel">
                             {{nivel}}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
                 <mat-form-field class="mr-5">
+                  <mat-label>Costo mayor a</mat-label>
+                  <input matInput type="number" formControlName="CostoMayor">
+              </mat-form-field>
+                <mat-form-field class="mr-5">
                     <mat-label>Costo menor a</mat-label>
-                    <input matInput type="number">
+                    <input matInput type="number" formControlName="CostoMenor">
                 </mat-form-field>
                 <mat-form-field class="mr-5">
-                    <mat-label>Costo mayor a</mat-label>
-                    <input matInput type="number">
-                </mat-form-field>
+                    <mat-label>Tipo de moneda</mat-label>
+                    <mat-select formControlName="Moneda" required>
+                      <mat-option *ngFor="let moneda of ['Soles','Dólares']" [value]="moneda">
+                        {{moneda}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+               
+                  <button mat-button type="submit" [disabled]="!queryForm.valid">Buscar</button>
             </form>
         </div>
     </div>
+</div>
+<div class="container-fluid mt-5">
+    <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Código</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Sistema</th>
+            <th scope="col">Descripción</th>
+            <th scope="col">Causa</th>
+            <th scope="col">Consecuencia</th>
+            <th scope="col">Costo</th>
+            <th scope="col">Moneda</th>
+            <th scope="col">Opciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let con of CON">
+            <th scope="row">CON</th>
+            <td>{{con['Estado']}}</td>
+            <td>{{con['Sistema']}}</td>
+            <td>{{con['DescripcionDelProblema']}}</td>
+            <td>{{con['Causa']}}</td>
+            <td>{{con['Consecuencia']}}</td>
+            <td>{{con['Costo']}}</td>
+            <td>{{con['TipoMoneda']}}</td>
+          </tr>
+          <tr *ngFor="let dis of DIS">
+            <th scope="row" >DIS</th>
+            <td>{{dis['Estado']}}</td>
+            <td>{{dis['Sistema']}}</td>
+            <td>{{dis['DescripcionDelProblema']}}</td>
+            <td>{{dis['Causa']}}</td>
+            <td>{{dis['Consecuencia']}}</td>
+            <td>{{dis['Costo']}}</td>
+            <td>{{dis['TipoMoneda']}}</td>
+          </tr>
+          <tr *ngFor="let oym of OyM">
+            <th scope="row" >OyM</th>
+            <td>{{oym['Estado']}}</td>
+            <td>{{oym['Sistema']}}</td>
+            <td>{{oym['DescripcionDelProblema']}}</td>
+            <td>{{oym['Causa']}}</td>
+            <td>{{oym['Consecuencia']}}</td>
+            <td>{{oym['Costo']}}</td>
+            <td>{{oym['TipoMoneda']}}</td>
+          </tr>
+        </tbody>
+      </table>
 </div>

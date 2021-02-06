@@ -42,6 +42,28 @@ export class DatabaseService {
   async updateProblemAmount(company:string,project:string,updateFieldObj:object){
     await this.angularFirestore.collection("Companies").doc(company).collection(project).doc('registro de problemas').update(updateFieldObj);
   }
+  //Función utilizada en "Búsqueda de componentes"
+  searchProblems(company:string,project:string,queryForm:object,tipo:string){      //Puedo enviar hasta antes de collection tipo y eso lo hago en cada if !!!! BUENAAA
+    let comparatorsArray:any = ['!=','!=','!=','!=','!='];
+    if (queryForm['Estado'] != "") {
+      comparatorsArray[0] = '==';      
+    }
+    if (queryForm['Sistema'] != "") {
+      comparatorsArray[1] = "==";      
+    }
+    if (queryForm['Impacto'] != "") {
+      comparatorsArray[2] = "==";      
+    }
+    if (queryForm['Severidad'] != "") {
+      comparatorsArray[3] = "==";      
+    }
+    if (queryForm['Moneda'] != "") {
+      comparatorsArray[4] = "==";      
+    }
+    //Aqui falta agregar los search en los demás campos
+    return this.angularFirestore.collection("Companies").doc(company).collection(project).doc('registro de problemas').collection(tipo, ref => ref.where('Estado', comparatorsArray[0], queryForm['Estado']).where('Sistema', comparatorsArray[1], queryForm['Sistema']).where('ImpactoEnUsuarios', comparatorsArray[2], queryForm['Impacto']).where('Severidad', comparatorsArray[3], queryForm['Severidad']).where('TipoMoneda', comparatorsArray[4], queryForm['Moneda'])).valueChanges();
+      
+  }
 
   //Aqui estaba probando funciones para consumir API's - puede que sirva para un futuro.
   funcion_prueba(){
