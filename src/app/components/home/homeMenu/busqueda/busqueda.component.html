@@ -14,7 +14,7 @@
                 <mat-form-field class="mr-5">
                     <mat-label>Estado <mat-icon matTooltip='Situación actual del problema  &#13; Pendiente: Problema aún por solucionar.  &#13; Completado: Problema solucionado.' matTooltipClass="custom-tooltip multiline-tooltip" aria-hidden="false" aria-label="Example home icon">help</mat-icon>
                     </mat-label>
-                    <mat-select formControlName="Estado" required>
+                    <mat-select formControlName="Estado">
                       <mat-option *ngFor="let estado of estados" [value]="estado">
                         {{estado}}
                       </mat-option>
@@ -25,7 +25,7 @@
                             matTooltipClass="custom-tooltip" aria-hidden="false" aria-label="Example home icon">help
                         </mat-icon>
                     </mat-label>
-                    <mat-select formControlName="Sistema" required>
+                    <mat-select formControlName="Sistema" >
                         <mat-option *ngFor="let sistema of sistemas" [value]="sistema">
                             {{sistema}}
                         </mat-option>
@@ -37,7 +37,7 @@
                             matTooltipClass="custom-tooltip multiline-tooltip" aria-hidden="false"
                             aria-label="Example home icon">help</mat-icon>
                     </mat-label>
-                    <mat-select formControlName="Impacto" required>
+                    <mat-select formControlName="ImpactoEnUsuarios" >
                         <mat-option *ngFor="let nivel of niveles" [value]="nivel">
                             {{nivel}}
                         </mat-option>
@@ -49,7 +49,7 @@
                             matTooltipClass="custom-tooltip multiline-tooltip" aria-hidden="false"
                             aria-label="Example home icon">help</mat-icon>
                     </mat-label>
-                    <mat-select formControlName="Severidad" required>
+                    <mat-select formControlName="Severidad" >
                         <mat-option *ngFor="let nivel of niveles" [value]="nivel">
                             {{nivel}}
                         </mat-option>
@@ -65,8 +65,8 @@
                 </mat-form-field>
                 <mat-form-field class="mr-5">
                     <mat-label>Tipo de moneda</mat-label>
-                    <mat-select formControlName="Moneda" required>
-                      <mat-option *ngFor="let moneda of ['Soles','Dólares']" [value]="moneda">
+                    <mat-select formControlName="TipoMoneda" >
+                      <mat-option *ngFor="let moneda of monedas" [value]="moneda">
                         {{moneda}}
                       </mat-option>
                     </mat-select>
