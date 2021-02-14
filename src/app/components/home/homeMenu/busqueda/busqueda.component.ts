@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { DatabaseService } from '../../../../services/database.service';
-import { Subscription } from 'rxjs';
+import { ObservableLike, Subscription } from 'rxjs';
 import { stringify } from '@angular/compiler/src/util';
 
 @Component({
@@ -14,6 +14,7 @@ export class BusquedaComponent implements OnInit, OnDestroy {
   subscription1: Subscription;
   subscription2: Subscription;
   subscription3: Subscription;
+  subscription4: Subscription;
   unsubscribe: boolean = false;
   sistemas: string[] = [
     '-',
@@ -53,6 +54,45 @@ export class BusquedaComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
   }
   ngOnDestroy() {
+  }
+
+  search_by_code(code:string){
+    //Limpiamos las variables iniciales
+    this.CON =[];
+    this.DIS = [];
+    this.OyM = [];
+    let userInfo: any = {};
+    //Convertimos a UpperCase
+    let u_code = code.toUpperCase();
+    let codeName = u_code.split("-",1)
+    let data:object[]=[];
+    if (codeName[0] == "OYM") {
+      codeName[0] = "OyM";
+      let nuevo = u_code.replace('OYM','OyM');
+      u_code = nuevo;
+    }
+    userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    this.subscription4 = this.databaseService.searchProblems(userInfo['company'], userInfo['projectName'], codeName[0]).subscribe(params => {
+      console.log(params);
+      data = params;
+      for (let index = 0, value:object ; index < data.length; index++) {
+        //Recorremos cada uno de los objetos dentro del array
+        value = data[index];
+        if (value['Codigo'] == u_code) {
+          if (codeName[0] == "CON") {
+            this.CON.push(value);
+          }
+          if (codeName[0] == "DIS") {
+            this.DIS.push(value);
+          }
+          if (codeName[0] == "OyM") {
+            this.OyM.push(value);
+          }
+          break;
+        }
+      }
+      this.subscription4.unsubscribe();
+    });
   }
 
   search() {

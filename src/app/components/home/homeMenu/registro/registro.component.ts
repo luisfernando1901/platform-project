@@ -175,6 +175,7 @@ export class RegistroComponent implements OnInit, OnDestroy {
         }),
         this._formBuilder.group({
           // ... form controls for our step
+          Codigo:[''],
           OrigenDelProblema: ['', Validators.required],
           Efecto: [''],
           Severidad: [''],
@@ -288,6 +289,7 @@ export class RegistroComponent implements OnInit, OnDestroy {
     formObj = Object.assign(formArray[0], formArray[1], formArray[2]);
     formObj['DiaInicio'] = aux1;
     formObj['DiaFin'] = aux2;
+    formObj['Codigo'] = this.codigo;
     console.log(formObj);
     //Lógica para definir el código del problema registrado
     if (formObj['OrigenDelProblema'] == 'Diseño') {
